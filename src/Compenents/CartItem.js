@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import productCatsImg from "../assets/product-img-5.png";
 import { getCarts, removeFromCart } from "../store/slice/cartSlice";
 import { CiSquareRemove } from "react-icons/ci";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
+
 
 const CartItem = ({
   key,
@@ -16,16 +18,20 @@ const CartItem = ({
 }) => {
   const dispatch = useDispatch();
   const [qty, setQty] = useState(cartItem.qty);
+  const [deleteLoading, setdeleteLoading] = useState(false);
   const [cartremoved, setcartremoved] = useState(false);
-
+    const {removeCart} = useSelector(state => state.carts) 
   const { _id } = cartItem;
 
   console.log(totalPrice);
 
   useEffect(() => {
     dispatch(getCarts());
-  }, [qty, cartremoved]);
+  }, [qty, cartremoved, dispatch, removeCart]);
   
+
+  
+
 //INCREASE QUANTITY OF CART
   const onQuantIncrement = () => {
     setQty(qty + 1);
@@ -44,20 +50,25 @@ const CartItem = ({
   //   dispatch(removeFromCart(_id))
   // }
 
+  const removeFromCart = (id) => {
+    onRemoveFromCart(id);
+    setcartremoved(true);     
+    if(id === cartItem._id){
+      setdeleteLoading(true)
+    }     
+  }
+
   console.log(cartItem.price * cartItem.qty);
   return (
     <div className="">
       <div className="grid content-center py-6 grid-cols-5 md:gap-7 gap-2 ">
         <div className="flex items-center h-full">
           <button
-            onClick={() => {
-              onRemoveFromCart(cartItem._id);
-              setcartremoved(true);
-           
-            }}
+            onClick={() => removeFromCart(cartItem._id)}
             className=""
           >
-            <CiSquareRemove style={{ width: 40, height: 60, color: "red" }} />
+            {removeCart.status === 'loading' && deleteLoading === true ? <ClipLoader /> : <CiSquareRemove style={{ width: 40, height: 60, color: "red" }} />}
+            
           </button>
         </div>
         <div className="flex">

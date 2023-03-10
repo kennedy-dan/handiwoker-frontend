@@ -34,6 +34,10 @@ const initialState = {
     status: "idle",
     result: null,
   },
+  removeCart: {
+    status: "idle",
+    result: null,
+  },
 };
 
 export const cartSlice = createSlice({
@@ -50,6 +54,7 @@ export const cartSlice = createSlice({
         if (!payload) return;
         state.carts.status = "successful";
         state.carts.result = payload;
+        toast.success("item added to cart")
       });
       //GET CART
     builder
@@ -65,13 +70,13 @@ export const cartSlice = createSlice({
       //REMOVE CART
     builder
       .addCase(removeFromCart.pending, (state) => {
-        state.status = "loading";
+        state.removeCart.status = "loading";
       })
       .addCase(removeFromCart.fulfilled, (state, { payload }) => {
         console.log(payload);
-        if (!payload) return;
-        state.getcart.status = "successful";
-        state.getcart.result = payload;
+        // if (!payload) return;
+        state.removeCart.status = "successful";
+        state.removeCart.result = payload;
         toast.success("item has been deleted ");
       });
   },
