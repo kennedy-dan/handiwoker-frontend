@@ -11,7 +11,6 @@ const instance = axios.create({
 		Accept: "application/json",
 	},
 	crossDomain: true,
-	// withCredentials: true,
 });
 
 

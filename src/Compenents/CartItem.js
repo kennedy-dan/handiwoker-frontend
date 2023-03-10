@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-// import productCatsImg from "../assets/product-img-5.png";
 import { getCarts, removeFromCart } from "../store/slice/cartSlice";
 import { CiSquareRemove } from "react-icons/ci";
 import { toast } from "react-toastify";
