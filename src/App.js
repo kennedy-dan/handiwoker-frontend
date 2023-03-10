@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Product from "./Pages/Product";
+import { Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "../src/store/index";
+import Cart from "./Pages/Cart";
+import { ToastContainer, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="font-[poppins] tracking-wider">
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={true}
+          pauseOnFocusLoss={false}
+          transition={Zoom}
+        />
+        <Routes>
+          <Route element={<Product />} path="/" />
+          <Route element={<Cart />} path="/cart" />
+        </Routes>
+      </div>
+    </Provider>
   );
 }
 
