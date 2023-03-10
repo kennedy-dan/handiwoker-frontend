@@ -56,6 +56,9 @@ const CartItem = ({
     if(id === cartItem._id){
       setdeleteLoading(true)
     }     
+    if(id !== cartItem._id){
+      setdeleteLoading(false)
+    }     
   }
 
   console.log(cartItem.price * cartItem.qty);
