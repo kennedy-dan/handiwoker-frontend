@@ -27,29 +27,33 @@ const ProductCard = ({ product }) => {
 
   return (
     <div>
+      <div className="m-10 py-10 borde shadow-sm">
+      <p className="text-xl  sm:mx-16 mx-10  md:mx-28 font-bold">Products</p>
+
+      </div>
       {productName ? (
         <div className="border sm:mx-16 mx-10  md:mx-28 border-gray-300 text-gray-400 items-center flex px-8 py-2 mt-10 justify-between">
-          <p>{productName} has been added to your cart</p>
+          <p className="md:text-sm text-[7px]">{productName} has been added to your cart</p>
           <Link
             to="/cart"
-            className="py-3 px-3  md:py-3 md:px-5 text-white bg-gray-800  hover:bg-white hover:text-gray-800 border border-black font-semibold text-[12px] md:text-[15px]"
+            className="py-1 px-2  md:py-3 md:px-5 text-white bg-gray-800  hover:bg-white hover:text-gray-800 border border-black font-semibold text-[4px] md:text-[15px]"
           >
             view cart
           </Link>
         </div>
       ) : null}
 
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         {product.result?.products.map((product) => (
-          <div className="w-[590px] h-[380px] m-10 border shadow-lg">
-            <div className="grid grid-cols-2 pt-10 px-8">
+          <div className=" m-10 border shadow-lg">
+            <div className="grid lg:grid-cols-2 md:grid-cols-1 py-10 px-8">
               <div className=" h-fit">
                 <img
                   src={product.images[0].url}
-                  className="w-80 h-[300px] object-contain"
+                  className="w-80 lg:h-[300px] h-[250px] object-contain"
                 />
               </div>
-              <div className="pl-7 ">
+              <div className="pl-7 lg:mt-0 mt-8">
                 <p className="text-2xl text-gray-700 font-semibold">
                   {product.name}
                 </p>
@@ -58,7 +62,7 @@ const ProductCard = ({ product }) => {
                 </p>
                 <p className="mt-4 text-gray-600">{product.price}</p>
                 <button
-                  className="text-sm font-semibold py-3 mt-4 px-6 text-white bg-gray-700"
+                  className="text-sm font-semibold py-3 mt-4 px-6 text-white bg-gray-800  hover:bg-white hover:text-gray-800 border border-black"
                   onClick={() => onAddToCart(product._id, product.name)}
                 >
                   Add to cart
